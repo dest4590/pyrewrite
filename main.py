@@ -31,7 +31,7 @@ if not os.path.isfile('config.ini'): # if config doesn't exist
 
 read_config()
 
-if get_setting('debug', if_option_not_exist='false') == 'false':
+if get_setting('debug', if_option_not_exist='false') == 'true':
     pip.main(requirements)
 
 from pyrogram import Client

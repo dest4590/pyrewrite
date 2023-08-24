@@ -10,27 +10,27 @@ async def warn(msg: Message, text: str, type = 'error', raw = False):
 
     if type == 'error':
         if not raw:
-            await msg.edit(f'❌ <b>{text.capitalize()}</b>')
+            await msg.edit(f'❌ <b>{text[0].upper() + text[1:]}</b>')
         elif raw:
-            await msg.edit(f'❌ {text.capitalize()}')
+            await msg.edit(f'❌ {text[0].upper() + text[1:]}')
 
     elif type == 'info':
         if not raw:
-            await msg.edit(f'ℹ <b>{text.capitalize()}</b>')
+            await msg.edit(f'ℹ <b>{text[0].upper() + text[1:]}</b>')
         elif raw:
-            await msg.edit(f'ℹ {text.capitalize()}')
+            await msg.edit(f'ℹ {text[0].upper() + text[1:]}')
 
     elif type == 'time':
         if not raw:
-            await msg.edit(f'⏳ <b>{text.capitalize()}</b>')
+            await msg.edit(f'⏳ <b>{text[0].upper() + text[1:]}</b>')
         elif raw:
-            await msg.edit(f'⏳ {text.capitalize()}')
+            await msg.edit(f'⏳ {text[0].upper() + text[1:]}')
 
     elif type == 'done':
         if not raw:
-            await msg.edit(f'✅ <b>{text.capitalize()}</b>')
+            await msg.edit(f'✅ <b>{text[0].upper() + text[1:]}</b>')
         elif raw:
-            await msg.edit(f'✅ {text.capitalize()}')
+            await msg.edit(f'✅ {text[0].upper() + text[1:]}')
         
     return msg
 

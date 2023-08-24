@@ -15,9 +15,11 @@ async def set(client: Client, message: Message):
     except:await warn(message, 'Enter setting!');return
 
     try:args[1] # set value
-    except:
+    except IndexError:
+        
         if message.reply_to_message == None:
             await warn(message, 'Enter setting value!');return
+        
         elif message.reply_to_message != None:
             if message.reply_to_message.text != None:
                 set_setting(args[0], message.reply_to_message.text, 'settings')

@@ -23,7 +23,7 @@ async def upload_command(client: Client, message: Message):
                     files={"file": open(downloaded_media, 'rb').read()},
         )
 
-        await warn(message, f'<b>Done!\nLink: </b><code>{envs.text}</code>', 'done', raw=True)
+        await warn(message, f'<b>Done!\nLink: </b>{envs.text}', 'done', raw=True)
         
         if send:
             await client.send_message(message.chat.id, envs.text)
