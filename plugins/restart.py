@@ -9,8 +9,10 @@ import asyncio
 @Client.on_message(filters.command('restart', prefixes=prefix.get()) & filters.me)
 async def restart(client: Client, message: Message):
     restart_msg = await warn(message, 'Restarting userbot...', 'time')
-
-    await os.execvp('python3', ['python3','main.py', f'{restart_msg.id},{restart_msg.chat.id}'])
+    if os.name != 'nt':
+        await os.execvp('python3', ['python3','main.py', f'{restart_msg.id},{restart_msg.chat.id}'])
+    else:
+        await os.execvp('python', ['python','main.py', f'{restart_msg.id},{restart_msg.chat.id}'])
 
 help_menu.add_command('restart', 'Restartes userbot')
 
