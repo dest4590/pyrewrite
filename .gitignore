@@ -1,6 +1,12 @@
+# Remove configs
 *.session
 *.session*
+*.yaml
+*.ini
+
+# Trash
 /__pycache__
 __pycache__/
-config.ini
+
+# Plugins
 /plugins/custom

@@ -4,7 +4,7 @@ from utils.prefix import prefix
 from utils.help import help_menu
 from datetime import datetime
 
-@Client.on_message(filters.command('ping', prefixes=prefix.get()) & filters.me)
+@Client.on_message(filters.command('ping', prefixes=prefix.symbol) & filters.me)
 async def ping(client: Client, message: Message):
     start_time = datetime.now()
     await message.edit('<b>⏳ Loading...</b>')
@@ -13,4 +13,4 @@ async def ping(client: Client, message: Message):
 
     await message.edit(f'<b>⏳ Ping:</b> <code>{ping_time} ms</code>')
 
-help_menu.add_command('ping', 'Ping Pong', 'Check ping')
+help_menu.command('ping', 'Ping Pong', 'Check ping')

@@ -2,9 +2,10 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from utils.prefix import prefix
 from utils.help import help_menu
-from utils.config import get_setting
+from utils.config import cfg
 import platform
-import os, sys
+import os
+import sys
 
 system = 'Linux 🐧' if os.name == 'posix' else 'Windows 💻'
 
@@ -17,12 +18,12 @@ if os.name == 'posix':
 
 default = f'''
 <b><a href="https://github.com/purpl3-yt/pyrewrite">PyRewrite</a> - Simple & Convenient</b>
-<b>🖌 Prefix:</b> <b>"</b><code>{prefix.get()}</code><b>"</b>
+<b>🖌 Prefix:</b> <b>"</b><code>{prefix}</code><b>"</b>
 <b>🖥 OS: {system}</b>
 <b>💻 Hosted on: {platform.node()}</b>
-<b>🔧 Commands: {str(help_menu.get_lenght())}</b>
-<b>📦 Built-in Plugins: {str(help_menu.get_lenght_buildin())}</b>
-<b>🔌 Custom Plugins: {str(help_menu.get_lenght_custom())}</b>
+<b>🔧 Commands: {str(help_menu.getLen())}</b>
+<b>📦 Built-in Plugins: {str(help_menu.getLenBuildin())}</b>
+<b>🔌 Custom Plugins: {str(help_menu.getLenCustom())}</b>
 <b>🛠 Modules channel: @pyrewrite</b>'''
 
 def get_info_menu(info_type = 'full'):
@@ -32,22 +33,23 @@ def get_info_menu(info_type = 'full'):
     elif info_type == 'lite':
         return f'''
 <b><a href="https://github.com/purpl3-yt/pyrewrite">PyRewrite</a> Info Menu</b>
-<b>🖌 Prefix:</b> <b>"</b><code>{prefix.get()}</code><b>"</b>
-<b>🔧 Commands: {str(help_menu.get_lenght())}</b>
+<b>🖌 Prefix:</b> <b>"</b><code>{prefix}</code><b>"</b>
+<b>🔧 Commands: {str(help_menu.getLen())}</b>
 <b>🛠 Modules channel: @pyrewrite</b>'''
     
     else: 
         return default
 
-@Client.on_message(filters.command('info', prefixes=prefix.get()) & filters.me)
+@Client.on_message(filters.command('info', prefixes=prefix.symbol) & filters.me)
 async def info(client: Client, message: Message):
     chat_id = message.chat.id
     await message.delete()
     
-    if message.reply_to_message != None:
-        await client.send_animation(chat_id, get_setting('banner', 'settings'), get_info_menu(get_setting('info', 'settings',if_option_not_exist='full')), reply_to_message_id=message.reply_to_message.id)
-    elif message.reply_to_message == None:
-        await client.send_animation(chat_id, get_setting('banner', 'settings'), get_info_menu(get_setting('info', 'settings',if_option_not_exist='full')))
+    if message.reply_to_message is not None:
+        await client.send_animation(chat_id, cfg.sets['banner'], get_info_menu(cfg.sets['info']), reply_to_message_id=message.reply_to_message.id)
+    
+    else:
+        await client.send_animation(chat_id, cfg.sets['banner'], get_info_menu(cfg.sets['info']))
     
 
-help_menu.add_command('info', 'Get info', 'Get info about userbot')
+help_menu.command('info', 'Get info', 'Get info about userbot')

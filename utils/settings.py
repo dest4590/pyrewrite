@@ -1,85 +1,86 @@
-from utils.config import set_setting, get_setting
+from utils.config import cfg
 from utils.prefix import prefix
 
 class Setting:
-    def __init__(self, name, description_short, description_long, default_value) -> None:
+    def __init__(self, name, descShort, descLong, default_value) -> None:
         self.name = name
-        self.description_short = description_short
-        self.description_long = description_long
+        self.descShort = descShort
+        self.descLong = descLong
         self.default_value = default_value
 
-    def get_name(self):
+    def getName(self):
         return self.name
 
-    def get_long_description(self):
-        return self.description_long
+    def getLongDesc(self):
+        return self.descLong
     
-    def get_short_description(self):
-        return self.description_short
+    def getShortDesc(self):
+        return self.descShort
     
     def __str__(self):
         return self.name
     
-    def get_value(self):
-        return get_setting(self.name, 'settings')
+    def getValue(self):
+        return cfg.sets[self.name]
 
-    def get_default_value(self):
+    def getDefaultValue(self):
         return self.default_value
     
-    def set_default_value(self):
-        return set_setting(self.name, self.default_value, 'settings')
+    def setDefaultValue(self):
+        cfg.sets[self.name] = self.default_value
     
 class Settings:
     settings_dict = {}
     def __init__(self) -> None:
         pass
 
-    def add(self, name, description_short, description_long = None, default_value = '.'):
+    def add(self, name, descShort, descLong = None, default_value = '.'):
         """Add setting"""
-        try:get_setting(name, 'settings')
-        except Exception as e:
+        try:
+            cfg.sets[name]
+        except Exception:
             if name != 'prefix':
-                set_setting(name, default_value,'settings')
+                cfg[name] = default_value
 
-        if description_long == None:
-            description_long = description_short
+        if descLong is None:
+            descLong = descShort
 
-        self.settings_dict[name] = Setting(name, description_short, description_long, default_value)
+        self.settings_dict[name] = Setting(name, descShort, descLong, default_value)
 
     def get(self):
-        "Get settings menu text"
+        """Get settings menu text"""
         settings_text = '<b>PyRewrite Settings</b>\n'
         for set in self.settings_dict.values():
-            setting_name = set.get_name()
-            set_description_short = set.get_short_description()
+            setting_name = set.getName()
+            set_descShort = set.getLongDesc()
             
-            settings_text += f'<code>{setting_name}</code> <b>- {set_description_short}</b>\n'
+            settings_text += f'<code>{setting_name}</code> <b>- {set_descShort}</b>\n'
 
         return settings_text
     
-    def get_raw(self):
-        "Get all settings in dict"
+    def getRaw(self):
+        """Get all settings in dict"""
         return [set for set in self.settings_dict.values()]
 
-    def get_lenght(self):
+    def getLen(self):
         """Get settings lenght"""
         return len(self.settings_dict.items())
 
-    def get_by_name(self, query):
+    def getByName(self, query):
         """Get setting class by name"""
         for set in self.settings_dict.values():
-            if set.get_name() == query:
+            if set.getName() == query:
                 return set
         
         return None
     
-    def get_value(self, set_name, new_value):
+    def getValue(self, set_name):
         "Get value of the setting"
-        set = self.get_by_name(set_name)
-        return set.get_value()
+        set = self.getByName(set_name)
+        return set.getValue()
     
 settings = Settings()
 # Add settings
 settings.add('prefix', 'userbot prefix', 'Changes the userbot prefix')
-settings.add('banner', f'{prefix.get()}info banner', f'changes {prefix.get()}info banner', 'https://envs.sh/hkf.mp4')
-settings.add('info', f'changes {prefix.get()}info text (can be full/lite)', f'Changes text of the {prefix.get()}info menu, can be full or lite', default_value='full')
+settings.add('banner', f'{prefix}info banner', f'changes {prefix}info banner', 'https://envs.sh/hkf.mp4')
+settings.add('info', f'changes {prefix}info text (can be full/lite)', f'Changes text of the {prefix}info menu, can be full or lite', default_value='full')

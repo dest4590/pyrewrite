@@ -2,18 +2,19 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from utils.prefix import prefix
 from utils.help import help_menu
-from plugins.helpers import get_args, warn
+from utils.helpers import getArgs, warn
 import requests
 import os
 
-@Client.on_message(filters.command('download', prefixes=prefix.get()) & filters.me)
+@Client.on_message(filters.command('download', prefixes=prefix.symbol) & filters.me)
 async def download_cmd(client: Client, message: Message):
-    if message.reply_to_message == None:
-        args = get_args(message)
+    if message.reply_to_message is None:
+        args = getArgs(message)
         link = args[0]
         await warn(message, 'Downloading...', 'time')
         
-        try:file = requests.get(link).content
+        try:
+            file = requests.get(link).content
         except Exception as e:
             await warn(message, f'<b>Error:</b> <code>{e}</code>', raw=True)
             return
@@ -28,8 +29,8 @@ async def download_cmd(client: Client, message: Message):
 
         os.remove(file_name)
 
-    elif message.reply_to_message != None:
-        if message.reply_to_message.text != None:
+    elif message.reply_to_message is not None:
+        if message.reply_to_message.text is not None:
             link = message.reply_to_message.text
 
             if link.startswith('https'):
@@ -55,4 +56,4 @@ async def download_cmd(client: Client, message: Message):
 
                 os.remove(file_name)
 
-help_menu.add_command('download', 'Download by link', 'Download and send file by link')
+help_menu.command('download', 'Download by link', 'Download and send file by link')

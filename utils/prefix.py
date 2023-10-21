@@ -1,13 +1,15 @@
-from utils.config import set_setting, get_setting
+from utils.config import cfg
 
 class Prefix:
-    def __init__(self) -> None:
-        pass
+    cfg.read()
 
-    def get(self):
-        return get_setting('prefix')
-    
+    def __init__(self) -> None:
+        self.symbol = cfg.sets['prefix']
+
+    def __str__(self) -> str:
+        return self.symbol
+
     def set(self, new):
-        set_setting('prefix', new)
+        cfg.sets['prefix'] = new
 
 prefix = Prefix()

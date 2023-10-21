@@ -2,13 +2,13 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from utils.prefix import prefix
 from utils.help import help_menu
-from plugins.helpers import get_args, warn
+from utils.helpers import getArgs, warn
 import os
 import pyrogram.errors
 
-@Client.on_message(filters.command('terminal', prefixes=prefix.get()) & filters.me)
+@Client.on_message(filters.command('terminal', prefixes=prefix.symbol) & filters.me)
 async def exm(client: Client, message: Message):
-    args = get_args(message)
+    args = getArgs(message)
     
     await warn(message, 'Executing...', 'time')
 
@@ -27,4 +27,4 @@ async def exm(client: Client, message: Message):
         
         os.remove('./output.txt')
 
-help_menu.add_command('terminal', 'Terminal output', 'Send you output from terminal')
+help_menu.command('terminal', 'Terminal output', 'Send you output from terminal')

@@ -2,19 +2,20 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from utils.prefix import prefix
 from utils.help import help_menu
-from plugins.helpers import get_args, warn
+from utils.helpers import getArgs, warn
 
-@Client.on_message(filters.command('help', prefixes=prefix.get()) & filters.me)
+@Client.on_message(filters.command('help', prefixes=prefix.symbol) & filters.me)
 async def info(client: Client, message: Message):
-    args = get_args(message)
+    args = getArgs(message)
 
-    try:args[0]
-    except:
+    try:
+        args[0]
+    except IndexError:
         await message.edit(help_menu.get())
     else:
-        cmd_found = help_menu.get_by_name(args[0])
-        if cmd_found == None:
+        cmdFound = help_menu.getByName(args[0])
+        if cmdFound is None:
             await warn(message, 'Command not found!')
 
         else:
-            await message.edit(f'<code>{prefix.get()}{cmd_found}</code> - <b>{cmd_found.get_long_description()}\nUsage: </b>\n{cmd_found.get_usage()}')
+            await message.edit(f'<code>{prefix}{cmdFound}</code> - <b>{cmdFound.getLongDesc()}\nUsage: </b>\n{cmdFound.getUsage()}')

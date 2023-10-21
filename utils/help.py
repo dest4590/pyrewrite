@@ -2,22 +2,22 @@ from utils.prefix import prefix
 import os
 
 class Command:
-    def __init__(self, name, description_short, description_long, usage) -> None:
+    def __init__(self, name, descShort, descLong, usage) -> None:
         self.name = name
-        self.description_short = description_short
-        self.description_long = description_long
+        self.descShort = descShort
+        self.descLong = descLong
         self.usage = usage
 
-    def get_name(self):
+    def getName(self):
         return self.name
 
-    def get_long_description(self):
-        return self.description_long
+    def getLongDesc(self):
+        return self.descLong
     
-    def get_short_description(self):
-        return self.description_short
+    def getShortDesc(self):
+        return self.descShort
     
-    def get_usage(self):
+    def getUsage(self):
         return self.usage
 
     def __str__(self):
@@ -29,38 +29,38 @@ class Help_Menu:
     def __init__(self) -> None:
         pass
 
-    def add_command(self, name, description_short = 'simple command', description_long = None, usage = 'Not set'):
-        if description_long == None:
-            description_long = description_short
+    def command(self, name, descShort = 'simple command', descLong = None, usage = 'Not set'):
+        if descLong is None:
+            descLong = descShort
 
-        self.commands[name] = [name, Command(name, description_short, description_long, usage)]
+        self.commands[name] = [name, Command(name, descShort, descLong, usage)]
 
     def get(self):
         help_text = '<b>PyRewrite modules</b>\n'
 
         for command in self.commands.values():
             command_name = command[0]
-            command_description_short = command[1].get_short_description()
+            command_descShort = command[1].getShortDesc()
 
-            help_text += f'<code>{prefix.get()}{command_name}</code><b> - {str(command_description_short).capitalize()}</b>\n'''
+            help_text += f'<code>{prefix}{command_name}</code><b> - {str(command_descShort).capitalize()}</b>\n'''
             
  
         return help_text
         
-    def get_lenght(self):
+    def getLen(self):
         return len(self.commands.items())
     
-    def get_by_name(self, query):
+    def getByName(self, query):
         for command in self.commands.values():
-            if command[1].get_name() == query:
+            if command[1].getName() == query:
                 return command[1]
         
         return None
     
-    def get_lenght_buildin(self):
+    def getLenBuildin(self):
         return len([m for m in os.listdir('plugins') if m not in ['custom', '__pycache__', 'helpers.py']])
 
-    def get_lenght_custom(self):
+    def getLenCustom(self):
         return len([m for m in os.listdir('plugins/custom') if m not in ['__pycache__']])
 
 help_menu = Help_Menu()
