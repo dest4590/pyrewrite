@@ -1,5 +1,6 @@
 from pyrogram.types import Message
 import random
+import os
 
 def getArgs(message: Message):
     return str(message.text).split(' ')[1:]
@@ -55,3 +56,9 @@ def textAnim(text: str):
         cipher.insert(char[0], char[1])
         
     return steps
+
+def RawRestart():
+    if os.name != 'nt':
+        os.execvp('python3', ['python3','main.py'])
+    else:
+        os.execvpe('python', ['python','main.py'])

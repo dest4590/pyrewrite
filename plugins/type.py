@@ -13,7 +13,7 @@ async def type(client: Client, message: Message):
     text = getArgs(message)
     
     try:
-        type_delay = float(cfg.sets['type_delay'])
+        type_delay = float(cfg.sets['type_delay', '0.05'])
     except IndexError:
         type_delay = 0.05
 
@@ -27,7 +27,7 @@ async def type(client: Client, message: Message):
 
 @Client.on_message(filters.me)
 async def make_type(client: Client, message: Message):
-    if cfg.sets['type'] == 't':
+    if cfg.sets['type', 'f'] == 't':
         message.text = '.type ' + message.text
         await type(client, message)
 

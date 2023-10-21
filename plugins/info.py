@@ -46,10 +46,10 @@ async def info(client: Client, message: Message):
     await message.delete()
     
     if message.reply_to_message is not None:
-        await client.send_animation(chat_id, cfg.sets['banner'], get_info_menu(cfg.sets['info']), reply_to_message_id=message.reply_to_message.id)
+        await client.send_animation(chat_id, cfg.sets['banner', 'https://envs.sh/hkf.mp4'], get_info_menu(cfg.sets['info']), reply_to_message_id=message.reply_to_message.id)
     
     else:
-        await client.send_animation(chat_id, cfg.sets['banner'], get_info_menu(cfg.sets['info']))
+        await client.send_animation(chat_id, cfg.sets['banner', 'https://envs.sh/hkf.mp4'], get_info_menu(cfg.sets['info']))
     
 
 help_menu.command('info', 'Get info', 'Get info about userbot')

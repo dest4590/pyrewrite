@@ -37,10 +37,10 @@ class Settings:
     def add(self, name, descShort, descLong = None, default_value = '.'):
         """Add setting"""
         try:
-            cfg.sets[name]
+            cfg.sets[name, '']
         except Exception:
             if name != 'prefix':
-                cfg[name] = default_value
+                cfg[name, default_value] = default_value
 
         if descLong is None:
             descLong = descShort

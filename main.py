@@ -1,19 +1,20 @@
-from pyrogram import Client
 from utils.config import cfg
-from loguru import logger
 import logging
 import os
 import sys
-import pip
+
+try:
+    from pyrogram import Client
+    from loguru import logger
+    import distro  # noqa: F401
+except ImportError:
+    for module in ['loguru', 'pyrogram', 'distro', 'tgcrypto']:
+        os.system('pip install ' + module)
+
+    from utils.helpers import RawRestart
+    RawRestart() # Restart userbot to import libraries
 
 os.chdir(sys.path[0])
-
-requirements = [
-    'install',
-    'pyrogram==2.0.104',
-    'distro',
-    '--upgrade'
-]
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
@@ -24,9 +25,6 @@ if os.path.exists('config.yaml') is False:
     sys.exit(0)
 
 cfg.read()
-
-if cfg.sets['debug', False] is True:
-    pip.main(requirements)
 
 if cfg.sets['api_id'] == '' or cfg.sets['api_hash'] == '':
     new_api_id = input('Please enter your api_id: ')
@@ -43,8 +41,8 @@ if not os.path.isdir('plugins/custom/'):
     
 client = Client(
     cfg.sets['session', 'pyrewrite'],
-    api_id=cfg.sets['api_id'],
-    api_hash=cfg.sets['api_hash'],
+    api_id=str(cfg.sets['api_id']),
+    api_hash=str(cfg.sets['api_hash']),
     device_model='PyRewrite',
     plugins = dict(root='plugins'),
 )
