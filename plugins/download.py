@@ -11,19 +11,19 @@ async def download_cmd(client: Client, message: Message):
     if message.reply_to_message is None:
         args = getArgs(message)
         link = args[0]
-        await warn(message, 'Downloading...', 'time')
+        await warn(message, 'Скачиваем...', 'time')
         
         try:
             file = requests.get(link).content
         except Exception as e:
-            await warn(message, f'<b>Error:</b> <code>{e}</code>', raw=True)
+            await warn(message, f'<b>Ошибка:</b> <code>{e}</code>', raw=True)
             return
         file_name = os.path.basename(link)
 
         with open(file_name, 'wb') as s:
             s.write(file)
 
-        await warn(message, 'Downloaded!', 'done')
+        await warn(message, 'Скачано!', 'done')
 
         await client.send_document(message.chat.id, file_name)
 
@@ -43,7 +43,7 @@ async def download_cmd(client: Client, message: Message):
                 if file_name == '':
                     file_name = 'unknown'
 
-                await warn(message, 'Downloading...', 'time')
+                await warn(message, 'Скачиванием...', 'time')
                 
                 file = requests.get(link).content
 
@@ -51,9 +51,9 @@ async def download_cmd(client: Client, message: Message):
                 with open(file_name, 'wb') as s:
                     s.write(file)
 
-                await warn(message, 'Downloaded!', 'done')
+                await warn(message, 'Скачано!', 'done')
                 await client.send_document(message.chat.id, file_name)
 
                 os.remove(file_name)
 
-help_menu.command('download', 'Download by link', 'Download and send file by link')
+help_menu.command('download', 'Скачивает файл', 'Скачивает и отправляет файл по ссылке')

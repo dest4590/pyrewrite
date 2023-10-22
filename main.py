@@ -21,17 +21,17 @@ logging.basicConfig(level=logging.INFO, format='%(message)s')
 if os.path.exists('config.yaml') is False:
     cfg.createSettings()
 
-    logger.info('Config file is created. Please, fill all fields in config, and restart')
+    logger.info('Создан конфиг, пожалуйста, заполните все поля в конфиге и перезапустите юсербота')
     sys.exit(0)
 
 cfg.read()
 
 if cfg.sets['api_id'] == '' or cfg.sets['api_hash'] == '':
-    new_api_id = input('Please enter your api_id: ')
+    new_api_id = input('Пожалуйста введите свой api_id: ')
     cfg.sets['api_id'] = new_api_id
     
 
-    new_api_hash = input('Please enter your api_hash: ')
+    new_api_hash = input('Теперь введите api_hash: ')
     cfg.sets['api_hash'] = new_api_hash
 
     cfg.write()
@@ -60,13 +60,12 @@ else:
         client.edit_message_text(int(chat_id), int(message_id), '✅ <b>Restarted!</b>')
 
 logo = '''
-  ______   ______  _______        ______  ___ _____ _____ 
- |  _ \ \ / /  _ \| ____\ \      / /  _ \|_ _|_   _| ____|
- | |_) \ V /| |_) |  _|  \ \ /\ / /| |_) || |  | | |  _|  
- |  __/ | | |  _ <| |___  \ V  V / |  _ < | |  | | | |___ 
- |_|    |_| |_| \_\_____|  \_/\_/  |_| \_\___| |_| |_____|
-                                                          '''
-
+  ___        ___                    _  _        
+ | _ \ _  _ | _ \ ___ __ __ __ _ _ (_)| |_  ___ 
+ |  _/| || ||   // -_)\ V  V /| '_|| ||  _|/ -_)
+ |_|   \_, ||_|_\\\\___| \_/\_/ |_|  |_| \__|\___|
+       |__/                                     
+'''
 print(logo)
 
 client.run()

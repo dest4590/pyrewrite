@@ -2,11 +2,11 @@ from utils.config import cfg
 from utils.prefix import prefix
 
 class Setting:
-    def __init__(self, name, descShort, descLong, default_value) -> None:
+    def __init__(self, name, descShort, descLong, defaultValue) -> None:
         self.name = name
         self.descShort = descShort
         self.descLong = descLong
-        self.default_value = default_value
+        self.defaultValue = defaultValue
 
     def getName(self):
         return self.name
@@ -24,32 +24,32 @@ class Setting:
         return cfg.sets[self.name]
 
     def getDefaultValue(self):
-        return self.default_value
+        return self.defaultValue
     
     def setDefaultValue(self):
-        cfg.sets[self.name] = self.default_value
+        cfg.sets[self.name] = self.defaultValue
     
 class Settings:
     settings_dict = {}
     def __init__(self) -> None:
         pass
 
-    def add(self, name, descShort, descLong = None, default_value = '.'):
+    def add(self, name, descShort, descLong = None, defaultValue = False):
         """Add setting"""
         try:
-            cfg.sets[name, '']
+            cfg.sets[name, defaultValue]
         except Exception:
             if name != 'prefix':
-                cfg[name, default_value] = default_value
+                cfg[name, defaultValue] = defaultValue
 
         if descLong is None:
             descLong = descShort
 
-        self.settings_dict[name] = Setting(name, descShort, descLong, default_value)
+        self.settings_dict[name] = Setting(name, descShort, descLong, defaultValue)
 
     def get(self):
         """Get settings menu text"""
-        settings_text = '<b>PyRewrite Settings</b>\n'
+        settings_text = '<b>Настройки PyRewrite</b>\n'
         for set in self.settings_dict.values():
             setting_name = set.getName()
             set_descShort = set.getLongDesc()
@@ -80,7 +80,8 @@ class Settings:
         return set.getValue()
     
 settings = Settings()
+
 # Add settings
-settings.add('prefix', 'userbot prefix', 'Changes the userbot prefix')
-settings.add('banner', f'{prefix}info banner', f'changes {prefix}info banner', 'https://envs.sh/hkf.mp4')
-settings.add('info', f'changes {prefix}info text (can be full/lite)', f'Changes text of the {prefix}info menu, can be full or lite', default_value='full')
+settings.add('prefix', 'префикс', 'Меняет префикс юсербота')
+settings.add('banner', f'{prefix}info banner', f'меняет баннер {prefix}info команды', 'https://envs.sh/hkf.mp4')
+settings.add('info', f'меняет вывод команды {prefix}info', f'Меняет вывод команды {prefix}info menu (может быть full либо lite)', defaultValue='full')

@@ -14,13 +14,13 @@ async def set(client: Client, message: Message):
     try:
         args[0] # set name
     except IndexError:
-        await warn(message, 'Choose a setting!')
+        await warn(message, 'Выберите настройку!')
         return
 
     try:
         args[1] # set value
     except IndexError:
-        await warn(message, 'Enter the setting value!')
+        await warn(message, 'Введите новое значение настройки!')
         return
 
     if args[0] == 'prefix':
@@ -28,11 +28,15 @@ async def set(client: Client, message: Message):
         await restart(client, message)
     
     else:
-        cfg.sets[args[0]] = args[1]
+        if args[1] != 't' or args[1] != 'f':
+            await warn(message, 'Введите значение настройки\nt - true\nf - false')
+            return
+        
+        cfg.sets[args[0]] = True if args[1] == 't' else False
 
-    await warn(message, f'<b>The setting:</b> <code>{args[0]}</code> <b>is set to: </b> <code>{args[1]}</code>', 'done', True)
+    await warn(message, f'<b>Настройка: </b><code>{args[0]}</code> <b>была установлена на: </b> <code>{args[1]}</code>', 'done', True)
 
-help_menu.command('set', 'Set Setting')
+help_menu.command('set', 'Установить значение настройки')
 
 @Client.on_message(filters.command('sets', prefixes=prefix.symbol) & filters.me)
 async def sets(client: Client, message: Message):
@@ -52,13 +56,13 @@ async def sets(client: Client, message: Message):
         else:
             if args[1] == 'reset':
                 cmd_found.setDefaultValue()
-                await warn(message, f'Setting {cmd_found.getName()} to default value', 'done')
+                await warn(message, f'Настройка {cmd_found.getName()} сброшенна на обычное значение', 'done')
                 return
 
         if cmd_found is None:
-            await warn(message, 'Setting not found!')
+            await warn(message, 'Настройка не найдена!')
 
         else:
-            await message.edit(f'<code>{cmd_found}</code> - <b>{cmd_found.getLongDesc()}</b>\n<b>Current value:</b> <code>{cmd_found.getValue()}</code>\n<b>Default value: </b><code>{cmd_found.getDefaultValue()}</code>')
+            await message.edit(f'<code>{cmd_found}</code> - <b>{cmd_found.getLongDesc()}</b>\n<b>Текущее значение:</b> <code>{cmd_found.getValue()}</code>\n<b>Обычное значение: </b><code>{cmd_found.getDefaultValue()}</code>')
 
-help_menu.command('sets', 'Get settings', 'Get list of settings', f'<code>{prefix}sets</code> <code><u>(setting)</u></code> <code>reset</code> <b></i>- for reset setting to default value</i></b>')
+help_menu.command('sets', 'получить настройки', 'получить список настроек', f'<code>{prefix}sets</code> <code><u>(setting)</u></code> <code>reset</code> <b></i>- чтобы сбросить настройку</i></b>')

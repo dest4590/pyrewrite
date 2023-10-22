@@ -5,7 +5,7 @@ class Cfg(dict):
         super().__setitem__(key, value)
         Config.write(self)
         Config.read(self)
-
+        
         return value
 
     def __getitem__(self, key):

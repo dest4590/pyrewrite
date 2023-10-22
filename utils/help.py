@@ -36,7 +36,7 @@ class Help_Menu:
         self.commands[name] = [name, Command(name, descShort, descLong, usage)]
 
     def get(self):
-        help_text = '<b>PyRewrite modules</b>\n'
+        help_text = '<b>Модули PyRewrite</b>\n'
 
         for command in self.commands.values():
             command_name = command[0]

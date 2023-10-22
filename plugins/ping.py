@@ -7,10 +7,10 @@ from datetime import datetime
 @Client.on_message(filters.command('ping', prefixes=prefix.symbol) & filters.me)
 async def ping(client: Client, message: Message):
     start_time = datetime.now()
-    await message.edit('<b>⏳ Loading...</b>')
+    await message.edit('<b>⏳ Загрузка...</b>')
     end_time = datetime.now()
     ping_time = (end_time - start_time).microseconds / 1000
 
-    await message.edit(f'<b>⏳ Ping:</b> <code>{ping_time} ms</code>')
+    await message.edit(f'<b>⏳ Пинг:</b> <code>{ping_time} миллисекунд</code>')
 
-help_menu.command('ping', 'Ping Pong', 'Check ping')
+help_menu.command('ping', 'проверка пинга', 'Проверить пинг с серверами Telegram')

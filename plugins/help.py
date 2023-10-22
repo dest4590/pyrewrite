@@ -15,7 +15,7 @@ async def info(client: Client, message: Message):
     else:
         cmdFound = help_menu.getByName(args[0])
         if cmdFound is None:
-            await warn(message, 'Command not found!')
+            await warn(message, 'Команда не найдена!')
 
         else:
             await message.edit(f'<code>{prefix}{cmdFound}</code> - <b>{cmdFound.getLongDesc()}\nUsage: </b>\n{cmdFound.getUsage()}')

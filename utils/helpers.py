@@ -1,4 +1,5 @@
 from pyrogram.types import Message
+from pyrogram import Client
 import random
 import os
 
@@ -37,6 +38,16 @@ async def warn(message: Message, text: str, type: str = 'error', raw: bool = Fal
 
     return message
 
+async def sendAsFile(client: Client, message: Message, longText: str):
+    await warn(message, 'Ошибка: Сообщение слишком длинное!\Отправляю как файл...')
+
+    with open('./output.txt', 'w', encoding='utf-8', errors='ignore') as out:
+        out.write(longText)
+    
+    await client.send_document(message.chat.id, './output.txt')
+    
+    os.remove('./output.txt')
+
 def textAnim(text: str):
     """
     Text Animation
@@ -61,4 +72,4 @@ def RawRestart():
     if os.name != 'nt':
         os.execvp('python3', ['python3','main.py'])
     else:
-        os.execvpe('python', ['python','main.py'])
+        os.execvp('python', ['python','main.py'])

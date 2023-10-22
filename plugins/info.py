@@ -18,13 +18,13 @@ if os.name == 'posix':
 
 default = f'''
 <b><a href="https://github.com/purpl3-yt/pyrewrite">PyRewrite</a> - Simple & Convenient</b>
-<b>🖌 Prefix:</b> <b>"</b><code>{prefix}</code><b>"</b>
-<b>🖥 OS: {system}</b>
-<b>💻 Hosted on: {platform.node()}</b>
-<b>🔧 Commands: {str(help_menu.getLen())}</b>
-<b>📦 Built-in Plugins: {str(help_menu.getLenBuildin())}</b>
-<b>🔌 Custom Plugins: {str(help_menu.getLenCustom())}</b>
-<b>🛠 Modules channel: @pyrewrite</b>'''
+<b>🖌 Префикс:</b> <b>"</b><code>{prefix}</code><b>"</b>
+<b>🖥 ОС: {system}</b>
+<b>💻 Запущено на: {platform.node()}</b>
+<b>🔧 Команд: {str(help_menu.getLen())}</b>
+<b>📦 Встроенных плагинов: {str(help_menu.getLenBuildin())}</b>
+<b>🔌 Кастомных плагинов: {str(help_menu.getLenCustom())}</b>
+<b>🛠 Канал с модулями: @pyrewrite</b>'''
 
 def get_info_menu(info_type = 'full'):
     if info_type == 'full':
@@ -32,10 +32,10 @@ def get_info_menu(info_type = 'full'):
 
     elif info_type == 'lite':
         return f'''
-<b><a href="https://github.com/purpl3-yt/pyrewrite">PyRewrite</a> Info Menu</b>
-<b>🖌 Prefix:</b> <b>"</b><code>{prefix}</code><b>"</b>
-<b>🔧 Commands: {str(help_menu.getLen())}</b>
-<b>🛠 Modules channel: @pyrewrite</b>'''
+<b><a href="https://github.com/purpl3-yt/pyrewrite">PyRewrite</a></b>
+<b>🖌 Префикс:</b> <b>"</b><code>{prefix}</code><b>"</b>
+<b>🔧 Команд: {str(help_menu.getLen())}</b>
+<b>🛠 Канал с модулями: @pyrewrite</b>'''
     
     else: 
         return default
@@ -52,4 +52,4 @@ async def info(client: Client, message: Message):
         await client.send_animation(chat_id, cfg.sets['banner', 'https://envs.sh/hkf.mp4'], get_info_menu(cfg.sets['info']))
     
 
-help_menu.command('info', 'Get info', 'Get info about userbot')
+help_menu.command('info', 'Информация', 'Получить информацию об юсерботе')

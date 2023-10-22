@@ -16,4 +16,4 @@ async def delete(client: Client, message: Message):
                 await message.reply_to_message.delete()
         await message.delete()
 
-help_menu.command('del', 'Deletes message', 'Deletes message that you reply')
+help_menu.command('del', 'Удаляет сообщение', 'Удаляет сообщение на которое вы ответили')

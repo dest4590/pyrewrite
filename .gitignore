@@ -1,8 +1,10 @@
-# Remove configs
+# Remove user files
 *.session
 *.session*
 *.yaml
 *.ini
+*.db
+
 
 # Trash
 /__pycache__

@@ -10,16 +10,16 @@ import os
 async def dlmod(client: Client, message: Message):
     if message.reply_to_message is not None:
         if message.reply_to_message.document is not None:
-            await warn(message, 'Downloading...', 'time')
+            await warn(message, 'Скачиваем...', 'time')
 
             await client.download_media(message.reply_to_message, './plugins/custom/'+os.path.basename(message.reply_to_message.document.file_name))
             
-            await warn(message, 'Done!', 'done')
+            await warn(message, 'Готово!', 'done')
             
             await restart(client, message)
         else:
-            await warn(message, 'The message must be a file!')
+            await warn(message, 'Сообщение должно иметь файл!')
     else:
-        await warn(message, 'Reply to message!')
+        await warn(message, 'Ответьте на сообщение!')
 
-help_menu.command('dlmod', 'download module')
+help_menu.command('dlmod', 'скачивает модуль')

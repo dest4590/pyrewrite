@@ -16,7 +16,7 @@ async def upload_command(client: Client, message: Message):
         send = True
     
     if message.reply_to_message is not None:
-        await warn(message, 'Uploading...', 'time')
+        await warn(message, 'Выкладываем...', 'time')
 
         downloaded_media = await client.download_media(message.reply_to_message, './')
 
@@ -25,7 +25,7 @@ async def upload_command(client: Client, message: Message):
                     files={"file": open(downloaded_media, 'rb').read()},
         )
 
-        await warn(message, f'<b>Done!\nLink: </b><code>{envs.text}</code>', 'done', raw=True)
+        await warn(message, f'<b>Готово!\nСсылка: </b><code>{envs.text}</code>', 'done', raw=True)
         
         if send:
             await client.send_message(message.chat.id, envs.text)
@@ -33,7 +33,7 @@ async def upload_command(client: Client, message: Message):
         os.remove('./' + os.path.basename(downloaded_media))
     
     elif message.reply_to_message is None:
-        await warn(message, 'Reply to message with media!')
+        await warn(message, 'Ответьте на сообщение с медиа!')
 
 
-help_menu.command('upload', 'upload media to site', 'Uploads media to a envs.sh', f'{prefix}upload\n{prefix}upload true (for send link after upload)')
+help_menu.command('upload', 'выкладывает видео', 'Выкладывает видео на envs.sh', f'{prefix}upload\n{prefix}upload true (для того, чтобы ссылка отправилась после выкладывания)')
