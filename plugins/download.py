@@ -1,10 +1,11 @@
+import os
+import requests
+
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from utils.prefix import prefix
 from utils.help import help_menu
 from utils.helpers import getArgs, warn
-import requests
-import os
 
 @Client.on_message(filters.command('download', prefixes=prefix.symbol) & filters.me)
 async def download_cmd(client: Client, message: Message):
@@ -12,9 +13,9 @@ async def download_cmd(client: Client, message: Message):
         args = getArgs(message)
         link = args[0]
         await warn(message, 'Скачиваем...', 'time')
-        
+
         try:
-            file = requests.get(link).content
+            file = requests.get(link, timeout=5).content
         except Exception as e:
             await warn(message, f'<b>Ошибка:</b> <code>{e}</code>', raw=True)
             return
@@ -45,8 +46,7 @@ async def download_cmd(client: Client, message: Message):
 
                 await warn(message, 'Скачиванием...', 'time')
                 
-                file = requests.get(link).content
-
+                file = requests.get(link, timeout=5).content
 
                 with open(file_name, 'wb') as s:
                     s.write(file)

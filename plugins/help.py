@@ -13,9 +13,9 @@ async def info(client: Client, message: Message):
     except IndexError:
         await message.edit(help_menu.get())
     else:
-        cmdFound = help_menu.getByName(args[0])
-        if cmdFound is None:
+        cmd_found = help_menu.get_by_name(args[0])
+        if cmd_found is None:
             await warn(message, 'Команда не найдена!')
 
         else:
-            await message.edit(f'<code>{prefix}{cmdFound}</code> - <b>{cmdFound.getLongDesc()}\nUsage: </b>\n{cmdFound.getUsage()}')
+            await message.edit(f'<code>{prefix}{cmd_found}</code> - <b>{cmd_found.get_long_desc()}\nUsage: </b>\n{cmd_found.get_usage()}')

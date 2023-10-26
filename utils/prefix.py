@@ -1,6 +1,8 @@
 from utils.config import cfg
 
 class Prefix:
+    """Prefix System, use Prefix.symbol"""
+
     cfg.read()
 
     def __init__(self) -> None:

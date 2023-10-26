@@ -12,3 +12,9 @@ __pycache__/
 
 # Plugins
 /plugins/custom
+
+# Pylint
+.pylintrc
+
+# vscode
+.vscode/

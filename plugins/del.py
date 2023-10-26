@@ -13,7 +13,8 @@ async def delete(client: Client, message: Message):
 
     else:
         if message.reply_to_message is not None:
-                await message.reply_to_message.delete()
+            await message.reply_to_message.delete()
+            
         await message.delete()
 
 help_menu.command('del', 'Удаляет сообщение', 'Удаляет сообщение на которое вы ответили')

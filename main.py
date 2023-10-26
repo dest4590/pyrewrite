@@ -1,14 +1,14 @@
-from utils.config import cfg
 import logging
 import os
 import sys
 
 try:
+    from utils.config import cfg  # noqa: F811
     from pyrogram import Client
     from loguru import logger
-    import distro  # noqa: F401
+    import distro  # pylint: disable=W0611   # noqa: F401
 except ImportError:
-    for module in ['loguru', 'pyrogram', 'distro', 'tgcrypto']:
+    for module in ['loguru', 'pyrogram', 'distro', 'tgcrypto', 'pyyaml']:
         os.system('pip install ' + module)
 
     from utils.helpers import RawRestart
@@ -16,10 +16,11 @@ except ImportError:
 
 os.chdir(sys.path[0])
 
+# Configure pyrogram logger
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
-if os.path.exists('config.yaml') is False:
-    cfg.createSettings()
+if not os.path.exists('config.yaml'):
+    cfg.create_settings()
 
     logger.info('Создан конфиг, пожалуйста, заполните все поля в конфиге и перезапустите юсербота')
     sys.exit(0)
@@ -44,7 +45,7 @@ client = Client(
     api_id=str(cfg.sets['api_id']),
     api_hash=str(cfg.sets['api_hash']),
     device_model='PyRewrite',
-    plugins = dict(root='plugins'),
+    plugins = {'root': 'plugins'},
 )
 
 try:
@@ -57,7 +58,7 @@ else:
     chat_id = sys_args[1]
 
     with client:
-        client.edit_message_text(int(chat_id), int(message_id), '✅ <b>Restarted!</b>')
+        client.edit_message_text(int(chat_id), int(message_id), '✅ <b>Перезагружено!</b>')
 
 logo = '''
   ___        ___                    _  _        

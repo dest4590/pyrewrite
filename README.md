@@ -3,5 +3,3 @@
 <h1 align='center'>PyRewrite</h1>
 
 <h1 align='center'>The better copy of <a href='https://github.com/purpl3-yt/pyuserbot'>PyUserBot</a></h1>
-
-<h1 align='center'><a href="https://github.com/purpl3-yt/pyrewrite/wiki">Wiki</a></h1>

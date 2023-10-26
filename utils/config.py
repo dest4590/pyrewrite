@@ -1,6 +1,11 @@
 import yaml
 
+# Using this, because sort_keys not working, try it self
+yaml.add_representer(dict, lambda self, data: yaml.representer.SafeRepresenter.represent_dict(self, data.items()))
+
 class Cfg(dict):
+    "Config dict"
+
     def __setitem__(self, key, value, default = False):
         super().__setitem__(key, value)
         Config.write(self)
@@ -12,17 +17,21 @@ class Cfg(dict):
         try:
             if isinstance(key, str):
                 return super().__getitem__(key)
-            elif isinstance(key, tuple):
-                return super().__getitem__(key[0])
+            
+            return super().__getitem__(key[0])
         except KeyError:
             if isinstance(key, tuple):
                 return self.__setitem__(key[0], key[1])
+            
+        return None
             
     def get(self):
         return dict(self)
 
 
 class Config:
+    """Simple config system, using YAML"""
+
     sets = Cfg({
         'api_id': '',
         'api_hash': '',
@@ -30,15 +39,15 @@ class Config:
     })
 
     def write(sets: Cfg):
-        with open('config.yaml', 'w') as file:
-            return yaml.dump(sets.get(), file)
+        with open('config.yaml', 'w', encoding='utf-8') as file:
+            return yaml.dump(sets.get(), file, sort_keys=False)
         
     def read(self):
-        with open('config.yaml', 'r') as file:
+        with open('config.yaml', 'r', encoding='utf-8') as file:
             self.sets = Cfg(yaml.load(file, Loader=yaml.FullLoader))
             
-    def createSettings(self):
-        with open('config.yaml', 'w') as file:
+    def create_settings(self):
+        with open('config.yaml', 'w', encoding='utf-8') as file:
             return yaml.dump(self.sets.get(), file)
 
 cfg = Config()

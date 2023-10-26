@@ -2,39 +2,42 @@ from utils.config import cfg
 from utils.prefix import prefix
 
 class Setting:
-    def __init__(self, name, descShort, descLong, defaultValue) -> None:
+    """Setting for class Settings"""
+
+    def __init__(self, name, desc_short, desc_long, defaultValue) -> None:
         self.name = name
-        self.descShort = descShort
-        self.descLong = descLong
+        self.desc_short = desc_short
+        self.desc_long = desc_long
         self.defaultValue = defaultValue
 
-    def getName(self):
+    def get_name(self):
         return self.name
 
-    def getLongDesc(self):
-        return self.descLong
+    def get_long_desc(self):
+        return self.desc_long
     
-    def getShortDesc(self):
-        return self.descShort
+    def get_short_desc(self):
+        return self.desc_short
     
     def __str__(self):
         return self.name
     
-    def getValue(self):
+    def get_value(self):
         return cfg.sets[self.name]
 
-    def getDefaultValue(self):
+    def get_default_value(self):
         return self.defaultValue
     
-    def setDefaultValue(self):
+    def set_default_value(self):
         cfg.sets[self.name] = self.defaultValue
     
 class Settings:
-    settings_dict = {}
-    def __init__(self) -> None:
-        pass
+    """Settings system, use settings_dict to get settings"""
 
-    def add(self, name, descShort, descLong = None, defaultValue = False):
+    settings_dict = {}
+
+
+    def add(self, name, desc_short, desc_long = None, defaultValue = False):
         """Add setting"""
         try:
             cfg.sets[name, defaultValue]
@@ -42,42 +45,43 @@ class Settings:
             if name != 'prefix':
                 cfg[name, defaultValue] = defaultValue
 
-        if descLong is None:
-            descLong = descShort
+        if desc_long is None:
+            desc_long = desc_short
 
-        self.settings_dict[name] = Setting(name, descShort, descLong, defaultValue)
+        self.settings_dict[name] = Setting(name, desc_short, desc_long, defaultValue)
 
     def get(self):
         """Get settings menu text"""
         settings_text = '<b>Настройки PyRewrite</b>\n'
-        for set in self.settings_dict.values():
-            setting_name = set.getName()
-            set_descShort = set.getLongDesc()
+
+        for setting in self.settings_dict.values():
+            setting_name = setting.get_name()
+            set_desc_short = setting.get_long_desc()
             
-            settings_text += f'<code>{setting_name}</code> <b>- {set_descShort}</b>\n'
+            settings_text += f'<code>{setting_name}</code> <b>- {set_desc_short}</b>\n'
 
         return settings_text
     
-    def getRaw(self):
+    def get_raw(self):
         """Get all settings in dict"""
-        return [set for set in self.settings_dict.values()]
+        return list(self.settings_dict.values())
 
-    def getLen(self):
+    def get_len(self):
         """Get settings lenght"""
         return len(self.settings_dict.items())
 
-    def getByName(self, query):
+    def get_by_name(self, query):
         """Get setting class by name"""
-        for set in self.settings_dict.values():
-            if set.getName() == query:
-                return set
+        for setting in self.settings_dict.values():
+            if setting.get_name() == query:
+                return setting
         
         return None
     
-    def getValue(self, set_name):
+    def get_value(self, set_name):
         "Get value of the setting"
-        set = self.getByName(set_name)
-        return set.getValue()
+        setting = self.get_by_name(set_name)
+        return setting.get_value()
     
 settings = Settings()
 

@@ -15,4 +15,8 @@ async def getmessage(client: Client, message: Message):
         await warn(message, '<b>Готово\nОтправляю как файл...</b>', 'done', True)
         await sendAsFile(client, message, str(message))
 
-help_menu.command('getmsg', 'Получить информацию об сообщении', 'Отправляет всю информацию об сообщении (json, pyrogram)')
+help_menu.command(
+    'getmsg', 
+    'Получить информацию об сообщении', 
+    'Отправляет всю информацию об сообщении (json, pyrogram)'
+)

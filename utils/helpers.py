@@ -1,12 +1,13 @@
-from pyrogram.types import Message
-from pyrogram import Client
 import random
 import os
+
+from pyrogram.types import Message
+from pyrogram import Client
 
 def getArgs(message: Message):
     return str(message.text).split(' ')[1:]
 
-async def warn(message: Message, text: str, type: str = 'error', raw: bool = False):
+async def warn(message: Message, text: str, warn_type: str = 'error', raw: bool = False):
     """
     Warn/Info about command
 
@@ -32,9 +33,9 @@ async def warn(message: Message, text: str, type: str = 'error', raw: bool = Fal
     }
 
     if raw:
-        await message.edit(f'{emojis[type]} {text[0].upper() + text[1:]}', disable_web_page_preview=True)
+        await message.edit(f'{emojis[warn_type] if raw is False else ""} {text[0].upper() + text[1:]}', disable_web_page_preview=True)
     else:
-        await message.edit(f'{emojis[type]} <b>{text[0].upper() + text[1:]}</b>', disable_web_page_preview=True)
+        await message.edit(f'{emojis[warn_type] if raw is False else ""} <b>{text[0].upper() + text[1:]}</b>', disable_web_page_preview=True)
 
     return message
 
