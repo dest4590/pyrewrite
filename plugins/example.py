@@ -5,4 +5,4 @@ from utils.prefix import prefix
 
 @Client.on_message(filters.command("exm", prefixes=prefix.symbol) & filters.me)
 async def exm(client: Client, message: Message):
-    await message.edit("Пример команды")
+    await message.edit("Command Example")

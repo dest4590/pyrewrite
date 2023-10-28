@@ -6,6 +6,7 @@ from utils.config import cfg
 from utils.settings import settings
 from plugins.restart import restart
 from utils.helpers import getArgs, warn
+from utils.i18n import i18n
 
 @Client.on_message(filters.command('set', prefixes=prefix.symbol) & filters.me)
 async def setcmd(client: Client, message: Message):
@@ -14,13 +15,13 @@ async def setcmd(client: Client, message: Message):
     try:
         args[0] # set name
     except IndexError:
-        await warn(message, 'Выберите настройку!')
+        await warn(message, i18n.get['cmds']['set-module-choose-setting'])
         return
 
     try:
         args[1] # set value
     except IndexError:
-        await warn(message, 'Введите новое значение настройки!')
+        await warn(message, i18n.get['cmds']['set-module-enter-new-value'])
         return
 
     if args[0] == 'prefix':
@@ -30,9 +31,9 @@ async def setcmd(client: Client, message: Message):
     else:        
         cfg.sets[args[0]] = args[1]
 
-    await warn(message, f'<b>Настройка: </b><code>{args[0]}</code> <b>была установлена на: </b> <code>{args[1]}</code>', 'done', True)
+    await warn(message, i18n.get['cmds']['set-module-setting-set'].format(args[0], args[1]), 'done', True)
 
-help_menu.command('set', 'Установить значение настройки')
+help_menu.command('set', i18n.get['cmds']['set-module-help-short-desc'])
 
 @Client.on_message(filters.command('sets', prefixes=prefix.symbol) & filters.me)
 async def sets(client: Client, message: Message):
@@ -52,13 +53,13 @@ async def sets(client: Client, message: Message):
         else:
             if args[1] == 'reset':
                 cmd_found.set_default_value()
-                await warn(message, f'Настройка {cmd_found.get_name()} сброшенна на обычное значение', 'done')
+                await warn(message, i18n.get['cmds']['sets-module-setting-reset'].format(cmd_found.get_name()), 'done')
                 return
 
         if cmd_found is None:
-            await warn(message, 'Настройка не найдена!')
+            await warn(message, i18n.get['cmds']['sets-module-setting-not-found'])
 
         else:
-            await message.edit(f'<code>{cmd_found}</code> - <b>{cmd_found.get_long_desc()}</b>\n<b>Текущее значение:</b> <code>{cmd_found.get_value()}</code>\n<b>Обычное значение: </b><code>{cmd_found.get_default_value()}</code>')
+            await message.edit(i18n.get['cmds']['sets-module-output'].format(cmd_found, cmd_found.get_long_desc(), cmd_found.get_value(), cmd_found.get_default_value()))
 
-help_menu.command('sets', 'получить настройки', 'получить список настроек', f'<code>{prefix}sets</code> <code><u>(setting)</u></code> <code>reset</code> <b></i>- чтобы сбросить настройку</i></b>')
+help_menu.command('sets', i18n.get['cmds']['sets-module-help-short-desc'], i18n.get['cmds']['sets-module-help-long-desc'], i18n.get['cmds']['sets-module-help-usage'].format(prefix, ))

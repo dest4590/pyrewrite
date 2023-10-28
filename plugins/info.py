@@ -8,6 +8,7 @@ from pyrogram.types import Message
 from utils.config import cfg
 from utils.help import help_menu
 from utils.prefix import prefix
+from utils.i18n import i18n
 
 SYSTEM = "Linux 🐧" if os.name == "posix" else "Windows 💻"
 
@@ -19,16 +20,7 @@ if os.name == "posix":
 
         SYSTEM = distro.name(pretty=False)
 
-default = f"""
-<b><a href="https://github.com/purpl3-yt/pyrewrite">PyRewrite</a> - Simple & Convenient</b>
-<b>🖌 Префикс:</b> <b>"</b><code>{prefix}</code><b>"</b>
-<b>🖥 ОС: {SYSTEM}</b>
-<b>💻 Размещено на: {platform.node()}</b>
-<b>🔧 Команд: {str(help_menu.get_len())}</b>
-<b>📦 Встроенных плагинов: {str(help_menu.get_len_buildin())}</b>
-<b>🔌 Кастомных плагинов: {str(help_menu.get_len_custom())}</b>
-<b>🛠 Канал с модулями: @pyrewrite</b>"""
-
+default = i18n.get['cmds']['info-module-default-text'].format(prefix, SYSTEM, platform.node(), str(help_menu.get_len()), str(help_menu.get_len_buildin()), str(help_menu.get_len_custom()))
 
 def get_info_menu(info_type="full"):
     """Returns info text by info_type param"""
@@ -36,11 +28,7 @@ def get_info_menu(info_type="full"):
         return default
 
     if info_type == "lite":
-        return f"""
-<b><a href="https://github.com/purpl3-yt/pyrewrite">PyRewrite</a></b>
-<b>🖌 Префикс:</b> <b>"</b><code>{prefix}</code><b>"</b>
-<b>🔧 Команд: {str(help_menu.get_len())}</b>
-<b>🛠 Канал с модулями: @pyrewrite</b>"""
+        return i18n.get['cmds']['info-module-lite-text'].format(prefix, str(help_menu.get_len()))
 
     return default
 
@@ -63,5 +51,4 @@ async def info(client: Client, message: Message):
             get_info_menu(cfg.sets["info"]),
         )
 
-
-help_menu.command("info", "Информация", "Получить информацию об юсерботе")
+help_menu.command("info", i18n.get['cmds']['info-module-help-short-desc'], i18n.get['cmds']['info-module-help-long-desc'])

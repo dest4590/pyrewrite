@@ -1,7 +1,7 @@
 # Remove user files
+config.yaml
 *.session
 *.session*
-*.yaml
 *.ini
 *.db
 
