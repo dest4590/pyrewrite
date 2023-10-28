@@ -4,7 +4,7 @@ import yaml
 yaml.add_representer(dict, lambda self, data: yaml.representer.SafeRepresenter.represent_dict(self, data.items()))
 
 class Cfg(dict):
-    "Config dict"
+    "Custom dictionary for config system"
 
     def __setitem__(self, key, value, default = False):
         super().__setitem__(key, value)
@@ -30,7 +30,10 @@ class Cfg(dict):
 
 
 class Config:
-    """Simple config system, using YAML"""
+    """Simple config system, using `YAML`"""
+
+    def __init__(self):
+        print('[PConfig] Config system init')
 
     sets = Cfg({
         'api_id': '',

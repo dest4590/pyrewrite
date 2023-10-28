@@ -1,13 +1,14 @@
-import random
-import os
+import random as __random
+import os as __os
 
-from pyrogram.types import Message
-from pyrogram import Client
+from pyrogram.types import Message as __Message
+from pyrogram import Client as __Client
+from utils.i18n import i18n
 
-def getArgs(message: Message):
+def getArgs(message: __Message):
     return str(message.text).split(' ')[1:]
 
-async def warn(message: Message, text: str, warn_type: str = 'error', raw: bool = False):
+async def warn(message: __Message, text: str, warn_type: str = 'error', raw: bool = False):
     """
     Warn/Info about command
 
@@ -39,38 +40,18 @@ async def warn(message: Message, text: str, warn_type: str = 'error', raw: bool 
 
     return message
 
-async def sendAsFile(client: Client, message: Message, longText: str):
-    await warn(message, 'Ошибка: Сообщение слишком длинное!\Отправляю как файл...')
+async def sendAsFile(client: __Client, message: __Message, longText: str):
+    await warn(message, i18n.get['sendAsFile-warning'])
 
     with open('./output.txt', 'w', encoding='utf-8', errors='ignore') as out:
         out.write(longText)
     
     await client.send_document(message.chat.id, './output.txt')
     
-    os.remove('./output.txt')
+    __os.remove('./output.txt')
 
-def textAnim(text: str):
-    """
-    Text Animation
-
-    Parameters:
-        text (str):
-            Text to animate
-    """
-    symbols = ['*', '@', '#', '$', '%', '^', '&', '&']
-    text = text + text[0]
-    cipher = [random.choice(symbols) for _ in range(len(text))]
-    steps = []
-    
-    for char in enumerate(text):
-        cipher.pop(char[0])
-        steps.append(''.join(cipher))
-        cipher.insert(char[0], char[1])
-        
-    return steps
-
-def RawRestart():
-    if os.name != 'nt':
-        os.execvp('python3', ['python3','main.py'])
+def raw_restart():
+    if __os.name != 'nt':
+        __os.execvp('python3', ['python3','main.py'])
     else:
-        os.execvp('python', ['python','main.py'])
+        __os.execvp('python', ['python','main.py'])

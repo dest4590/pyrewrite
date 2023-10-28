@@ -1,0 +1,270 @@
+ru:
+  # main.py
+  config-created: Создан конфиг, пожалуйста, заполните все поля в конфиге и перезапустите юсербота
+  enter-api-id: 'Пожалуйста введите свой api_id: '
+  enter-api-hash: 'Пожалуйста введите свой api_hash: '
+
+  # Userbot utils
+  restarted: ✅ <b>Перезагружено!</b>
+
+  # Settings
+  settings-banner: |
+    <b>Настройки PyRewrite</b>
+
+  setting-in-menu: |
+    <code>{}</code> <b>- {}</b>
+
+  setting-prefix-short-desc: префикс
+  setting-prefix-long-desc: Меняет префикс юсербота
+
+  setting-banner-short-desc: меняет баннер info команды
+  
+  setting-info-short-desc: меняет вывод команды info
+  setting-info-long-desc: Меняет вывод команды info (может быть full либо lite)
+
+  setting-lang-short-desc: Язык юсербота (может быть ru либо en)
+
+
+  # helpers.py
+  sendAsFile-warning: |
+    Ошибка: Сообщение слишком длинное!
+    Отправляю как файл...
+
+  cmds:
+    # terminal.py
+    terminal-module-output: |
+      <b>Команда:</b> <code>{}</code> 
+      Вывод: 
+      <code>{}</code>
+
+    terminal-module-executing: Выполнение...
+
+    # swap.py
+    swap-module-account-change: | 
+      Меняем аккаунт на: <code>{}</code>
+      Перезагружаем юсербота...
+
+    swap-module-help-short-desc: Меняет аккаунт на другой
+    swap-module-help-long-desc: Меняет сессию pyrogram на другую (лучше всего использовать с 2 сессиями)
+
+    # stop.py
+    stop-module-stop-message: 👋 <b>Юсербот остановлен</b>
+
+    stop-module-help-short-desc: Выключить юсербота
+
+    # set.py
+    set-module-choose-setting: Выберите настройку!
+    set-module-enter-new-value: Введите новое значение настройки!
+    set-module-setting-set: '<b>Настройка: </b><code>{}</code> <b>была установлена на: </b> <code>{}</code>'
+    
+    set-module-help-short-desc: Установить значение настройки
+
+    sets-module-setting-reset: Настройка {} сброшенна на обычное значение
+    sets-module-setting-not-found: Настройка не найдена!
+    sets-module-output: '<code>{}</code> - <b>{}</b>\n<b>Текущее значение:</b> <code>{}</code>\n<b>Обычное значение: </b><code>{}</code>'
+    
+    sets-module-help-short-desc: получить настройки
+    sets-module-help-long-desc: получить список настроек
+
+    sets-module-help-usage: <code>{}sets</code> <code><u>(setting)</u></code> <code>reset</code> <b></i>- чтобы сбросить настройку</i></b>
+
+    # restart.py
+    restart-module-message: Перезагрузка юсербота...
+
+    restart-module-help-short-desc: Перезапускает юсербота
+
+    update-module-message: Обновление...
+    update-module-git-error: | 
+      Юсербот установлен не через git, обновление невозможно
+      Пожалуйста, установите юсербота через git!
+
+    done: Готово!
+
+    update-module-help-short-desc: обновить юсербота
+    update-module-help-long-desc: Обновляет юсербота через Git (требует установку через git clone)
+
+    # ping.py
+    ping-module-loading: Загрузка...
+    ping-module-output: '<b>⏳ Пинг:</b> <code>{} миллисекунд</code>'
+
+    ping-module-help-short-desc: проверка пинга
+    ping-module-help-long-desc: Проверить пинг с серверами Telegram
+
+    # info.py
+    info-module-default-text: |
+      <b><a href="https://github.com/purpl3-yt/pyrewrite">PyRewrite</a> - Simple & Convenient</b>
+      <b>🖌 Префикс:</b> <b>"</b><code>{}</code><b>"</b>
+      <b>🖥 ОС: {}</b>
+      <b>💻 Размещено на: {}</b>
+      <b>🔧 Команд: {}</b>
+      <b>📦 Встроенных плагинов: {}</b>
+      <b>🔌 Кастомных плагинов: {}</b>
+      <b>🛠 Канал с модулями: @pyrewrite</b>
+
+    info-module-lite-text: |
+      <b><a href="https://github.com/purpl3-yt/pyrewrite">PyRewrite</a></b>
+      <b>🖌 Префикс:</b> <b>"</b><code>{}</code><b>"</b>
+      <b>🔧 Команд: {}</b>
+      <b>🛠 Канал с модулями: @pyrewrite</b>
+
+    info-module-help-short-desc: Информация
+    info-module-help-long-desc: Получить информацию об юсерботе
+
+    # help.py
+    help-module-command-not-found: Команда не найдена!
+    help-module-output: '<code>{}{}</code> - <b>{}\nUsage: </b>\n{}'
+
+    # getmsg.py
+    getmsg-module-output: 'Получено сообщение: {}!'
+    getmsg-module-asfile: | 
+      <b>Готово
+      Отправляю как файл...</b>
+
+    getmsg-module-help-short-desc: Получить информацию об сообщении
+    getmsg-module-help-long-desc: Выводит всю информацию об сообщении (json, pyrogram)
+    
+
+    # dlmod.py
+    dlmod-module-message: 'Скачиваем...'
+    dlmod-module-error-file: Сообщение должно иметь файл!
+    dlmod-module-error-reply: Ответьте на сообщение!
+    dlmod-module-help-short-desc: скачивает модуль
+
+    # del.py
+    del-module-help-short-desc: Удаляет сообщение
+    del-module-help-long-desc: Удаляет сообщение на которое вы ответили
+    
+en:
+  config-created: A config has been created, please fill in all fields in the config and restart the userbot
+  enter-api-id: 'Please enter your api_id: '
+  enter-api-hash: 'Please enter your api_hash: '
+
+  restarted: ✅ <b>Restarted!</b>
+
+  # Settings
+  settings-banner: |
+    <b>Настройки PyRewrite</b>
+
+  setting-in-menu: |
+    <code>{}</code> <b>- {}</b>
+
+  setting-prefix-short-desc: prefix
+  setting-prefix-long-desc: Changes the userbot prefix
+
+  setting-banner-short-desc: changes the command info banner
+  
+  setting-info-short-desc: changes the output of the info command
+  setting-info-long-desc: Changes the output of the info command (can be full or lite)
+
+  setting-lang-short-desc: Userbot language (can be ru or en)
+
+  
+  # helpers.py
+  sendAsFile-warning: |
+    Ошибка: Сообщение слишком длинное!
+    Отправляю как файл...
+
+  cmds:
+    # terminal.py
+    terminal-module-output: |
+      <b>Command:</b> <code>{}</code>
+      Output:
+      <code>{}</code>
+
+    terminal-module-executing: Executing...
+
+    # swap.py
+    swap-module-account-change: |
+      Change account to: <code>{}</code>
+      Restarting the userbot...
+
+    swap-module-help-short-desc: Swaps account to another
+    swap-module-help-long-desc: Swaps a pyrogram session for another (best use with 2 sessions)
+    
+    #stop.py
+    stop-module-message: 👋 <b>Userbot stopped</b>
+    
+    stop-module-help-short-desc: Turn off userbot
+
+  
+    #set.py
+    set-module-choose-setting: Choose a setting!
+    set-module-enter-new-value: Enter a new setting value!
+    set-module-setting-set: '<b>Setting: </b><code>{}</code> <b>has been set to: </b> <code>{}</code>'
+    
+    set-module-help-short-desc: Set setting value
+
+    sets-module-setting-reset: Setting {} has been reset to default value
+    sets-module-setting-not-found: Setting not found!
+    sets-module-output: '<code>{}</code> -<b>{}</b>\n<b>Current value:</b> <code>{}</code>\n<b>Default value: </b><code>{}</code>'
+    
+    sets-module-help-short-desc: get settings
+    sets-module-help-long-desc: get list of settings
+
+    sets-module-help-usage: '<code>{}sets</code> <code><u>(setting)</u></code> <code>reset</code> <b></i>-to reset the setting</i></b>'
+
+    #restart.py
+    restart-module-message: Restarting userbot...
+
+    restart-module-help-short-desc: Restarts the userbot
+
+    update-module-message: Updating...
+    update-module-git-error: |
+      Userbot is not installed via git, updating is not possible
+      Please install userbot via git!
+
+    update-module-done: 'Done!'
+
+    update-module-help-short-desc: update userbot
+    update-module-help-long-desc: Updates userbot via Git (requires installation via git clone)
+
+    #ping.py
+    ping-module-loading: Loading...
+    ping-module-output: <b>⏳ Ping:</b> <code>{} milliseconds</code>
+
+    ping-module-help-short-desc: ping check
+    ping-module-help-long-desc: Check ping with Telegram servers
+
+    #info.py
+    info-module-default-text: |
+      <b><a href="https://github.com/dest4590/pyrewrite">PyRewrite</a> -Simple & Convenient</b>
+      <b>🖌 Prefix:</b> <b>"</b><code>{}</code><b>"</b>
+      <b>🖥 OS: {}</b>
+      <b>💻 Posted on: {}</b>
+      <b>🔧 Commands: {}</b>
+      <b>📦 Built-in plugins: {}</b>
+      <b>🔌 Custom plugins: {}</b>
+      <b>🛠 Channel with modules: @pyrewrite</b>
+
+    info-module-lite-text: |
+      <b><a href="https://github.com/dest4590/pyrewrite">PyRewrite</a></b>
+      <b>🖌 Prefix:</b> <b>"</b><code>{}</code><b>"</b>
+      <b>🔧 Commands: {}</b>
+      <b>🛠 Channel with modules: @pyrewrite</b>
+
+    info-module-help-short-desc: Information
+    info-module-help-long-desc: Get information about the userbot
+
+   #help.py
+    help-module-command-not-found: Command not found!
+    help-module-output: '<code>{}{}</code> -<b>{}\nUsage: </b>\n{}'
+
+    # getmsg.py
+    getmsg-module-output: 'Message received: {}!'
+    getmsg-module-asfile: |
+      <b>Done
+      I send it as a file...</b>
+
+    getmsg-module-help-short-desc: Get message information
+    getmsg-module-help-long-desc: Prints all message information (json, pyrogram)
+    
+
+    #dlmod.py
+    dlmod-module-message: Downloading...
+    dlmod-module-error-file: Message must have a file!
+    dlmod-module-error-reply: Reply to the message!
+    dlmod-module-help-short-desc: downloads the module
+
+    #del.py
+    del-module-help-short-desc: Deletes a message
+    del-module-help-long-desc: Deletes a message you replied to
