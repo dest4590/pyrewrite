@@ -1,6 +1,15 @@
-import yaml
+import os
 
-# Using this, because sort_keys not working, try it self
+try:
+    import yaml
+except ModuleNotFoundError:
+    os.system('pip install pyyaml')
+
+    from utils.helpers import raw_restart
+    print('Restarting')
+    raw_restart() # Restart userbot to import libraries
+
+# Using this, because sort_keys=False not working, try it self
 yaml.add_representer(dict, lambda self, data: yaml.representer.SafeRepresenter.represent_dict(self, data.items()))
 
 class Cfg(dict):
