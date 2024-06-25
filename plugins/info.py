@@ -7,8 +7,8 @@ from pyrogram.types import Message
 
 from utils.config import cfg
 from utils.help import help_menu
-from utils.prefix import prefix
 from utils.i18n import i18n
+from utils.prefix import prefix
 
 SYSTEM = "Linux 🐧" if os.name == "posix" else "Windows 💻"
 

@@ -4,17 +4,18 @@ import sys
 
 logo = '''
   ___        ___                    _  _        
- | _ \ _  _ | _ \ ___ __ __ __ _ _ (_)| |_  ___ 
- |  _/| || ||   // -_)\ V  V /| '_|| ||  _|/ -_)
- |_|   \_, ||_|_\\\\___| \_/\_/ |_|  |_| \\__|\___|
+ | _ \\ _  _ | _ \\ ___ __ __ __ _ _ (_)| |_  ___ 
+ |  _/| || ||   // -_)\\ V  V /| '_|| ||  _|/ -_)
+ |_|   \\_, ||_|_\\\\___| \\_/\\_/ |_|  |_| \\__|\\___|
        |__/                                     
 '''
 
 print(logo)
 
 try:
-    from utils.config import cfg
     from pyrogram import Client
+
+    from utils.config import cfg
     
     if os.name != 'nt':
         import distro  # pylint: disable=W0611 # noqa: F401

@@ -230,7 +230,7 @@ en:
       <b><a href="https://github.com/dest4590/pyrewrite">PyRewrite</a> -Simple & Convenient</b>
       <b>🖌 Prefix:</b> <b>"</b><code>{}</code><b>"</b>
       <b>🖥 OS: {}</b>
-      <b>💻 Posted on: {}</b>
+      <b>💻 Hosted on: {}</b>
       <b>🔧 Commands: {}</b>
       <b>📦 Built-in plugins: {}</b>
       <b>🔌 Custom plugins: {}</b>
@@ -245,11 +245,11 @@ en:
     info-module-help-short-desc: Information
     info-module-help-long-desc: Get information about the userbot
 
-   #help.py
+    #help.py
     help-module-command-not-found: Command not found!
     help-module-output: '<code>{}{}</code> -<b>{}\nUsage: </b>\n{}'
 
-    # getmsg.py
+    #getmsg.py
     getmsg-module-output: 'Message received: {}!'
     getmsg-module-asfile: |
       <b>Done

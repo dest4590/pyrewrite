@@ -1,9 +1,10 @@
-import random as __random
 import os as __os
 
-from pyrogram.types import Message as __Message
 from pyrogram import Client as __Client
+from pyrogram.types import Message as __Message
+
 from utils.i18n import i18n
+
 
 def getArgs(message: __Message):
     return str(message.text).split(' ')[1:]
