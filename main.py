@@ -45,12 +45,10 @@ from utils.i18n import i18n
 
 if cfg.sets['api_id'] == '' or cfg.sets['api_hash'] == '':
     new_api_id = input(i18n.get['enter-api-id'])
-    cfg.sets['api_id'] = new_api_id
+    cfg.sets['api_id'] = new_api_id 
     
     new_api_hash = input(i18n.get['enter-api-hash'])
     cfg.sets['api_hash'] = new_api_hash
-
-    cfg.write()
 
 if not os.path.isdir('plugins/custom/'):
     os.mkdir('plugins/custom/')
